@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
     using System.Web.Http;
+    using System.Web.Http.Cors;
 
     using SportsStore.Domain.Models;
 
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
         public IHttpActionResult GetAll()

@@ -3,16 +3,31 @@
 }
 
 <!DOCTYPE html>
-<html ng-app>
+<html ng-app="sportsStore">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Sports Store</title>
 </head>
-<body>
+<body ng-controller="HomeController as home">
     <h1>Sports Store</h1>
-    <p>{{"Welcome to the " + "sports store!"}}</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in home.products">
+                <td>{{product.name}}</td>
+                <td>{{product.price | currency:"£"}}</td>
+            </tr>
+        </tbody>
+    </table>
 
     <!-- Third Party Libraries -->
     <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/App/Home/home.js"></script>
 </body>
 </html>
