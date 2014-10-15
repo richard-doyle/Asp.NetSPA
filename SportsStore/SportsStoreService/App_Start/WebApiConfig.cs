@@ -2,12 +2,22 @@
 {
     using System.Web.Http;
 
+    using Microsoft.Practices.Unity;
+
     using Newtonsoft.Json.Serialization;
+
+    using SportsStore.Data.Repositories;
+
+    using SportsStoreService.DependencyResolution;
 
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
         {
+            var container = new UnityContainer();
+            container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
+            config.DependencyResolver = new UnityResolver(container);
+
             config.EnableCors();
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();

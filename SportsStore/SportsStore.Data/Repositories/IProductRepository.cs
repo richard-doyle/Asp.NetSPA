@@ -4,7 +4,7 @@
 
     using SportsStore.Data.Entities;
 
-    public interface IProductsRepository
+    public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
     }

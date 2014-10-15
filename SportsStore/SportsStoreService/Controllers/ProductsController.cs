@@ -8,11 +8,16 @@
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
-        private readonly IProductsRepository productsRepository = new ProductsRepository();
+        private readonly IProductRepository productRepository;
+
+        public ProductsController(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
 
         public IHttpActionResult GetAll()
         {
-            return this.Ok(this.productsRepository.GetProducts());
+            return this.Ok(this.productRepository.GetProducts());
         }
     }
 }
