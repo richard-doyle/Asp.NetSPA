@@ -19,5 +19,13 @@
         {
             return this.context.Products.ToList();
         }
+
+        public Product AddProduct(Product product)
+        {
+            this.context.Products.Add(product);
+            this.context.SaveChanges();
+
+            return product;
+        }
     }
 }

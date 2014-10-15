@@ -12,7 +12,7 @@
         {
         }
 
-        public IDbSet<Product> Products { get; set; }
+        public virtual IDbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

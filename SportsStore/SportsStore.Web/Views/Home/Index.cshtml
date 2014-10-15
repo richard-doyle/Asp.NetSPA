@@ -25,6 +25,15 @@
             </tr>
         </tbody>
     </table>
+    
+    <h2>Add New Product</h2>
+    
+    <form ng-submit="home.submit()">
+        Enter Name and Price:
+        <input type="text" ng-model="home.name" name="name" />
+        <input type="number" min="0" step="0.01" ng-model="home.price" name="price" />
+        <input type="submit" id="submit" value="Add" />
+    </form>
 
     <!-- Third Party Libraries -->
     <script src="~/Scripts/angular.min.js"></script>

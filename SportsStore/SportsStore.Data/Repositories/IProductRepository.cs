@@ -7,5 +7,7 @@
     public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
+
+        Product AddProduct(Product product);
     }
 }
