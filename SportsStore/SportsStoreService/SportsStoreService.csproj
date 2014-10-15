@@ -115,10 +115,6 @@
       <Project>{9916b823-8ac2-4add-bb0a-ae57ec3e8df6}</Project>
       <Name>SportsStore.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SportsStore.Domain\SportsStore.Domain.csproj">
-      <Project>{765fdf84-4135-4be3-b282-a24496342670}</Project>
-      <Name>SportsStore.Domain</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

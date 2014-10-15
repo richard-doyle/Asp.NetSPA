@@ -1,19 +1,18 @@
 ﻿namespace SportsStoreService.Controllers
 {
-    using System.Linq;
     using System.Web.Http;
     using System.Web.Http.Cors;
 
-    using SportsStore.Data.Context;
+    using SportsStore.Data.Repositories;
 
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
-        private readonly SportsStoreContext db = new SportsStoreContext();
+        private readonly IProductsRepository productsRepository = new ProductsRepository();
 
         public IHttpActionResult GetAll()
         {
-            return this.Ok(this.db.Products.ToList());
+            return this.Ok(this.productsRepository.GetProducts());
         }
     }
 }
