@@ -96,5 +96,113 @@
             // Assert
             Assert.Equal("Product", result.Name);
         }
+
+        [Fact]
+        public void ProductRepositoryRemoveProductWithValidIdSavesContext()
+        {
+            // Arrange
+            var products = new List<Product>
+                               {
+                                   new Product { Id = 1 }, new Product { Id = 2 }, new Product { Id = 3 }
+                               }.AsQueryable();
+
+            var mockSet = new Mock<IDbSet<Product>>();
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var mockContext = new Mock<SportsStoreContext>();
+            mockContext.Setup(m => m.Products).Returns(mockSet.Object);
+
+            var productRepository = new ProductRepository(mockContext.Object);
+
+            // Act
+            productRepository.RemoveProduct(1);
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Once());
+        }
+
+        [Fact]
+        public void ProductRepositoryRemoveProductValidIdRemovesProduct()
+        {
+            // Arrange
+            var products = new List<Product>
+                               {
+                                   new Product { Id = 1 }, new Product { Id = 2 }, new Product { Id = 3 }
+                               }.AsQueryable();
+
+            var mockSet = new Mock<IDbSet<Product>>();
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var mockContext = new Mock<SportsStoreContext>();
+            mockContext.Setup(m => m.Products).Returns(mockSet.Object);
+
+            var productRepository = new ProductRepository(mockContext.Object);
+
+            // Act
+            productRepository.RemoveProduct(1);
+
+            // Assert
+            mockSet.Verify(m => m.Remove(It.Is<Product>(p => p.Id == 1)), Times.Once());
+        }
+
+        [Fact]
+        public void ProductRepositoryRemoveProductWithInvalidIdDoesNotSavesContext()
+        {
+            // Arrange
+            var products = new List<Product>
+                               {
+                                   new Product { Id = 1 }, new Product { Id = 2 }, new Product { Id = 3 }
+                               }.AsQueryable();
+
+            var mockSet = new Mock<IDbSet<Product>>();
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var mockContext = new Mock<SportsStoreContext>();
+            mockContext.Setup(m => m.Products).Returns(mockSet.Object);
+
+            var productRepository = new ProductRepository(mockContext.Object);
+
+            // Act
+            productRepository.RemoveProduct(4);
+
+            // Assert
+            mockContext.Verify(m => m.SaveChanges(), Times.Never);
+        }
+
+        [Fact]
+        public void ProductRepositoryRemoveProductInvalidIdDoesNotRemoveProduct()
+        {
+            // Arrange
+            var products = new List<Product>
+                               {
+                                   new Product { Id = 1 }, new Product { Id = 2 }, new Product { Id = 3 }
+                               }.AsQueryable();
+
+            var mockSet = new Mock<IDbSet<Product>>();
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Provider).Returns(products.Provider);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.Expression).Returns(products.Expression);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.ElementType).Returns(products.ElementType);
+            mockSet.As<IQueryable<Product>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
+
+            var mockContext = new Mock<SportsStoreContext>();
+            mockContext.Setup(m => m.Products).Returns(mockSet.Object);
+
+            var productRepository = new ProductRepository(mockContext.Object);
+
+            // Act
+            productRepository.RemoveProduct(4);
+
+            // Assert
+            mockSet.Verify(m => m.Remove(It.IsAny<Product>()), Times.Never);
+        }
     }
 }

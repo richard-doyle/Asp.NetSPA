@@ -27,5 +27,17 @@
 
             return product;
         }
+
+        public void RemoveProduct(int productId)
+        {
+            var product = this.context.Products.FirstOrDefault(p => p.Id == productId);
+            if (product == null)
+            {
+                return;
+            }
+
+            this.context.Products.Remove(product);
+            this.context.SaveChanges();
+        }
     }
 }

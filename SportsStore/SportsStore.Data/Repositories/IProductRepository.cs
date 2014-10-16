@@ -9,5 +9,7 @@
         IEnumerable<Product> GetProducts();
 
         Product AddProduct(Product product);
+
+        void RemoveProduct(int productId);
     }
 }

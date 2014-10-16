@@ -1,6 +1,7 @@
 ﻿namespace SportsStoreService
 {
     using System.Web.Http;
+    using System.Web.Http.Cors;
 
     using Microsoft.Practices.Unity;
 
@@ -18,7 +19,7 @@
             container.RegisterType<IProductRepository, ProductRepository>(new HierarchicalLifetimeManager());
             config.DependencyResolver = new UnityResolver(container);
 
-            config.EnableCors();
+            config.EnableCors(new EnableCorsAttribute("*", "*", "*"));
             config.MapHttpAttributeRoutes();
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
 

@@ -1,12 +1,10 @@
 ﻿namespace SportsStoreService.Controllers
 {
     using System.Web.Http;
-    using System.Web.Http.Cors;
 
     using SportsStore.Data.Entities;
     using SportsStore.Data.Repositories;
 
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ProductsController : ApiController
     {
         private readonly IProductRepository productRepository;
@@ -24,6 +22,12 @@
         public IHttpActionResult Post([FromBody] Product product)
         {
             return this.Ok(this.productRepository.AddProduct(product));
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            this.productRepository.RemoveProduct(id);
+            return this.Ok();
         }
     }
 }

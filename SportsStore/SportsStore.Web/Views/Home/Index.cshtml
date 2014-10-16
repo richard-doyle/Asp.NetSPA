@@ -20,12 +20,18 @@
                     <tr>
                         <th>Item</th>
                         <th>Price</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="product in home.products">
                         <td>{{product.name}}</td>
                         <td>{{product.price | currency:"£"}}</td>
+                        <td>
+                            <button class="btn-xs btn-danger" ng-click="home.removeProduct(product.id)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
