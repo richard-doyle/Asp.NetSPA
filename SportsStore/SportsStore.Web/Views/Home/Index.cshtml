@@ -7,37 +7,55 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Sports Store</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body ng-controller="Home as home">
+<body ng-controller="Home as home" class="container">
     <h1>Sports Store</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="product in home.products">
-                <td>{{product.name}}</td>
-                <td>{{product.price | currency:"£"}}</td>
-            </tr>
-        </tbody>
-    </table>
-    
-    <h2>Add New Product</h2>
-    
-    <form ng-submit="home.submit()">
-        Enter Name and Price:
-        <input type="text" ng-model="home.name" name="name" />
-        <input type="number" min="0" step="0.01" ng-model="home.price" name="price" />
-        <input type="submit" id="submit" value="Add" />
-    </form>
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Products</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="product in home.products">
+                        <td>{{product.name}}</td>
+                        <td>{{product.price | currency:"£"}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <div class="well">
+                <form ng-submit="home.submit()">
+                    <fieldset>
+                        <legend>Add New Product</legend>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" ng-model="home.name" name="name" class="form-control" placeholder="Enter Product Name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Price (£):</label>
+                            <input type="number" min="0" step="0.01" ng-model="home.price" name="price" class="form-control" />
+                        </div>
+                        <input type="submit" id="submit" value="Add" class="btn btn-primary" />
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- Third Party Libraries -->
     <script src="~/Scripts/angular.min.js"></script>
     <script src="~/App/app.module.js"></script>
     <script src="~/App/Home/home.controller.js"></script>
+    <script src="~/Scripts/jquery-2.1.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
 </body>
 </html>
